@@ -18,7 +18,7 @@ from forms import *
 
 app = Flask(__name__)
 moment = Moment(app)
-app.config.from_object('config')
+app.config.from_object('config.config')
 db = SQLAlchemy(app)
 
 # TODO: connect to a local postgresql database
@@ -56,7 +56,7 @@ class Artist(db.Model):
     # TODO: implement any missing fields, as a database migration using Flask-Migrate
 
 # TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
-
+db.create_all()
 #----------------------------------------------------------------------------#
 # Filters.
 #----------------------------------------------------------------------------#
@@ -77,6 +77,10 @@ app.jinja_env.filters['datetime'] = format_datetime
 
 @app.route('/')
 def index():
+  print('environment: ' + app.config['ENV'])
+  print('secret key: ' + str(app.config['SECRET_KEY']))
+  print('debug: ' + str(app.config['DEBUG']))
+  print('database url: ' + app.config['SQLALCHEMY_DATABASE_URI'])
   return render_template('pages/home.html')
 
 
