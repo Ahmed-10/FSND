@@ -119,10 +119,7 @@ class VenueForm(FlaskForm):
         'facebook_link', validators=[URL()]
     )
     website = StringField(
-        'website', validators=[URL()]
-    )
-    image_link = StringField(
-        'image_link', validators=[URL()]
+        'website'
     )
     seeking_talent = SelectField(
         'seeking_talent', validators=[DataRequired()],
@@ -132,7 +129,7 @@ class VenueForm(FlaskForm):
         ]
     )
     seeking_description = StringField(
-        'seeking_description', validators=[DataRequired()]
+        'seeking_description'
     )
 
 class ArtistForm(FlaskForm):
@@ -235,10 +232,7 @@ class ArtistForm(FlaskForm):
         'facebook_link', validators=[URL()]
     )
     website = StringField(
-        'website', validators=[URL()]
-    )
-    image_link = StringField(
-        'image_link', validators=[URL()]
+        'website'
     )
     seeking_venue = SelectField(
         'seeking_venue', validators=[DataRequired()],
@@ -248,7 +242,7 @@ class ArtistForm(FlaskForm):
         ]
     )
     seeking_description = StringField(
-        'seeking_description', validators=[DataRequired()]
+        'seeking_description'
     )
 
 # TODO IMPLEMENT NEW ARTIST FORM AND NEW SHOW FORM
