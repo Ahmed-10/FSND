@@ -135,7 +135,7 @@ def create_app(test_config=None):
             })
 
         except:
-            abort(422)
+            abort(500)
 
     '''
     POST endpoint to POST a new question,
@@ -160,15 +160,18 @@ def create_app(test_config=None):
 
                 new_question = Question(question, answer, category, difficulty)
 
-                new_question.insert()
+                try:
+                    new_question.insert()
+                    return jsonify({
+                        'success': True,
+                        'question': new_question.question
+                    })
 
-                return jsonify({
-                  'success': True,
-                  'question': new_question.question
-                })
+                except:
+                    abort(500)
 
             except:
-                abort(422)
+                abort(400)
 
         else:
             '''
@@ -286,5 +289,21 @@ def create_app(test_config=None):
           'error': 422,
           'message': 'unprocessable'
         }), 422
+
+    @app.errorhandler(400)
+    def unprocessable(error):
+        return jsonify({
+          'success': False,
+          'error': 400,
+          'message': 'bad request'
+        }), 400
+
+    @app.errorhandler(500)
+    def unprocessable(error):
+        return jsonify({
+          'success': False,
+          'error': 500,
+          'message': 'internal server error'
+        }), 500
 
     return app

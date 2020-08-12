@@ -132,9 +132,9 @@ class TriviaTestCase(unittest.TestCase):
 
         data = json.loads(res.data)
 
-        self.assertEqual(res.status_code, 422)
+        self.assertEqual(res.status_code, 400)
         self.assertEqual(data['success'], False)
-        self.assertEqual(data['message'], 'unprocessable')
+        self.assertEqual(data['message'], 'bad request')
 
     '''
     TEST: Search by any phrase.
