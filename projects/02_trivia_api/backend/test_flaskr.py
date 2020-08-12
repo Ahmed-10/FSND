@@ -60,7 +60,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
 
-        self.assertTrue(data['totalQuestions'])
+        self.assertTrue(data['total_questions'])
 
     # ------------fail------------
     def test_get_all_questions_fail(self):
@@ -183,7 +183,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['currentCategory'], category.type)
         self.assertTrue(data['questions'])
-        self.assertTrue(data['totalQuestions'])
+        self.assertTrue(data['total_questions'])
 
     # ------------fail------------
     def test_get_questions_by_category_fail(self):
@@ -205,8 +205,10 @@ class TriviaTestCase(unittest.TestCase):
     def test_get_quiz_success(self):
         res = self.client().post('/quizzes', json={
             'previous_questions': [],
-            'quiz_category': 1
-            })
+            'quiz_category': {
+                'id': 1,
+                'type':'Science'
+            }})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -217,8 +219,10 @@ class TriviaTestCase(unittest.TestCase):
     def test_finish_quiz_success(self):
         res = self.client().post('/quizzes', json={
             'previous_questions': [20, 21, 22],
-            'quiz_category': 1
-            })
+            'quiz_category': {
+                'id': 1,
+                'type':'Science'
+            }})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -232,8 +236,10 @@ class TriviaTestCase(unittest.TestCase):
     def test_get_quiz_fail(self):
         res = self.client().post('/quizzes', json={
             'previous_questions': [],
-            'quiz_category': 7
-            })
+            'quiz_category': {
+                'id': 7,
+                'type':'Development'
+            }})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
