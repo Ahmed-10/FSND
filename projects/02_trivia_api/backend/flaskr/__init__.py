@@ -231,7 +231,8 @@ def create_app(test_config=None):
         body = request.get_json()
 
         previous_questions = body.get('previous_questions')
-        category_id = body.get('quiz_category')
+        category = body.get('quiz_category')
+        category_id = category.get('id')
 
         if category_id == 0:
             questions = Question.query.all()
