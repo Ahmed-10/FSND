@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Trivia API’s documentation! &#8212; Trivia API 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-trivia-api-s-documentation">
+<h1>Welcome to Trivia API’s documentation!<a class="headerlink" href="#welcome-to-trivia-api-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>Udacity is invested in creating bonding experiences for its employees and students.</p>
+<p>A bunch of team members got the idea to hold trivia on a regular basis and to create a webpage to manage the trivia app and play the game. so we built the APIs they needed to support their application.</p>
+<p>what does The application do:</p>
+<ol class="arabic simple">
+<li><p>Display questions - both all questions and by category. Questions show the question, category and difficulty rating by default and can show/hide the answer.</p></li>
+<li><p>Delete questions.</p></li>
+<li><p>Add questions and require that they include question and answer text.</p></li>
+<li><p>Search for questions based on a text query string.</p></li>
+<li><p>Play the quiz game, randomizing either all questions or within a specific category.</p></li>
+</ol>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference internal" href="#getting-started">Getting Started</a></dt><dd><ul>
+<li><p><a class="reference internal" href="#dependencies">Dependencies</a></p></li>
+<li><p><a class="reference internal" href="#pip-dependencies">PIP Dependencies</a></p></li>
+<li><p><a class="reference internal" href="#database-setup">Database Setup</a></p></li>
+<li><p><a class="reference internal" href="#running-the-server">Running the server</a></p></li>
+<li><p><a class="reference internal" href="#testing">Testing</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#api-referance">API referance</a></dt><dd><ul>
+<li><p><a class="reference internal" href="#get-categories">GET ‘/categories’</a></p></li>
+<li><p><a class="reference internal" href="#get-questions">GET ‘/questions’</a></p></li>
+<li><p><a class="reference internal" href="#delete-questions-question-id">DELETE ‘/questions/&lt;question_id&gt;’</a></p></li>
+<li><p><a class="reference internal" href="#post-questions">POST ‘/questions’</a></p></li>
+<li><p><a class="reference internal" href="#get-categories-id-questions">GET ‘/categories/&lt;id&gt;/questions’</a></p></li>
+<li><p><a class="reference internal" href="#post-quizzes">POST ‘/quizzes’</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p id="dependencies"><strong>Dependencies</strong></p>
+<ul class="simple">
+<li><p>Python 3.7: Follow instructions to install the latest version of python for your platform in the python docs</p></li>
+<li><p>Virtual Enviornment: We recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organaized. Instructions for setting up a virual enviornment for your platform can be found in the python docs</p></li>
+</ul>
+<hr class="docutils" />
+<p id="pip-dependencies"><strong>PIP Dependencies</strong></p>
+<ul>
+<li><p>Once you have your virtual environment setup and running, install dependencies by naviging to the <code class="docutils literal notranslate"><span class="pre">/backend</span></code> directory and running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>This will install all of the required packages we selected within the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file.</p>
+<hr class="docutils" />
+<p id="database-setup"><strong>Database Setup</strong></p>
+<p>With Postgres running, restore a database using the <code class="docutils literal notranslate"><span class="pre">trivia.psql</span></code> file provided. <em>From the backend folder in terminal run</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">psql</span> <span class="n">trivia</span> <span class="o">&lt;</span> <span class="n">trivia</span><span class="o">.</span><span class="n">psql</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p id="running-the-server"><strong>Running the server</strong></p>
+<p>From within the <code class="docutils literal notranslate"><span class="pre">backend</span></code> directory first ensure you are working using your created virtual environment.</p>
+<p>To run the server, execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">FLASK_APP</span><span class="o">=</span><span class="n">flaskr</span>
+<span class="n">export</span> <span class="n">FLASK_ENV</span><span class="o">=</span><span class="n">development</span>
+<span class="n">flask</span> <span class="n">run</span>
+</pre></div>
+</div>
+<p>Setting the <code class="docutils literal notranslate"><span class="pre">FLASK_ENV</span></code> variable to development will detect file changes and restart the server automatically.</p>
+<p>Setting the <code class="docutils literal notranslate"><span class="pre">FLASK_APP</span></code> variable to flaskr directs flask to use the flaskr directory and the <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file to find the application.</p>
+<hr class="docutils" />
+<p id="testing"><strong>Testing</strong></p>
+<p>To run the tests, run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dropdb</span> <span class="n">trivia_test</span>
+
+<span class="n">createdb</span> <span class="n">trivia_test</span>
+
+<span class="n">psql</span> <span class="n">trivia_test</span> <span class="o">&lt;</span> <span class="n">trivia</span><span class="o">.</span><span class="n">psql</span>
+
+<span class="n">python</span> <span class="n">test_flaskr</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="api-referance">
+<h1>API referance<a class="headerlink" href="#api-referance" title="Permalink to this headline">¶</a></h1>
+<p id="get-categories"><strong>GET</strong>
+<em>‘/categories’</em></p>
+<ul class="simple">
+<li><p>Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category</p></li>
+<li><p>Request Arguments: None</p></li>
+<li><p>Returns: An object with three keys, success, num_of_categories, and categories, that contains a object of id: category_string key:value pairs.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s1">&#39;categories&#39;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s1">&#39;1&#39;</span> <span class="p">:</span> <span class="s2">&quot;Science&quot;</span><span class="p">,</span>
+      <span class="s1">&#39;2&#39;</span> <span class="p">:</span> <span class="s2">&quot;Art&quot;</span><span class="p">,</span>
+      <span class="s1">&#39;3&#39;</span> <span class="p">:</span> <span class="s2">&quot;Geography&quot;</span><span class="p">,</span>
+      <span class="s1">&#39;4&#39;</span> <span class="p">:</span> <span class="s2">&quot;History&quot;</span><span class="p">,</span>
+      <span class="s1">&#39;5&#39;</span> <span class="p">:</span> <span class="s2">&quot;Entertainment&quot;</span><span class="p">,</span>
+      <span class="s1">&#39;6&#39;</span> <span class="p">:</span> <span class="s2">&quot;Sports&quot;</span>
+      <span class="p">},</span>
+   <span class="s1">&#39;num_of_categories&#39;</span><span class="p">:</span> <span class="mi">6</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p id="get-questions"><strong>GET</strong>
+<em>‘/questions’</em></p>
+<ul class="simple">
+<li><p>Fetches a list of questions in each quetion the keys are the question, answer, category, difficulty and the values are the corresponding of each</p></li>
+<li><p>Request Arguments: None</p></li>
+<li><p>Returns: An object with five keys, success, total_questions, categories, currentCategory, and questions that contains an array of objects.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;categories&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;Science&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;Art&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;Geography&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="s2">&quot;History&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;5&quot;</span><span class="p">:</span> <span class="s2">&quot;Entertainment&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;6&quot;</span><span class="p">:</span> <span class="s2">&quot;Sports&quot;</span>
+   <span class="p">},</span>
+   <span class="s2">&quot;currentCategory&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+   <span class="s2">&quot;questions&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="s2">&quot;Maya Angelou&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+         <span class="s2">&quot;difficulty&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+         <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+         <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;Whose autobiography is entitled &#39;I Know Why the Caged Bird Sings&#39;?&quot;</span>
+      <span class="p">},</span> <span class="o">....</span><span class="p">],</span>
+   <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+   <span class="s2">&quot;total_questions&quot;</span><span class="p">:</span> <span class="mi">21</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p id="delete-questions-question-id"><strong>DELETE</strong>
+<em>‘/questions/&lt;question_id&gt;’</em></p>
+<ul class="simple">
+<li><p>An endpoint to DELETE question using a question ID.</p></li>
+<li><p>Request Arguments: None</p></li>
+<li><p>Returns: An object with Two keys, success, and deleted that contains a value of the deleted quetion ID.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+   <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p id="post-questions"><strong>POST</strong>
+<em>‘/questions’</em></p>
+<ul>
+<li><dl>
+<dt>to add a new question to an existing category</dt><dd><ul class="simple">
+<li><p>Request Arguments:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;this is a test question?&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="s2">&quot;this is a test answer&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;difficulty&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+   <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Returns:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;this is a test question?&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<p>—</p>
+<ul>
+<li><dl>
+<dt>Fetches a list of questions that contains a specific search term</dt><dd><ul class="simple">
+<li><p>Request Arguments:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;searchTerm&quot;</span><span class="p">:</span> <span class="s2">&quot;Taj Mahal&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Returns: An object with three keys, success, searchTerm, and list of questions that contain the search term.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;questions&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="s2">&quot;Agra&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+         <span class="s2">&quot;difficulty&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+         <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+         <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;The Taj Mahal is located in which Indian city?&quot;</span>
+      <span class="p">}</span>
+   <span class="p">],</span>
+   <span class="s2">&quot;searchTerm&quot;</span><span class="p">:</span> <span class="s2">&quot;Taj Mahal&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<hr class="docutils" />
+<p id="get-categories-id-questions"><strong>GET</strong>
+<em>‘/categories/&lt;id&gt;/questions’</em></p>
+<ul class="simple">
+<li><p>Fetches a list of questions in each quetion the keys are the question, answer, category, difficulty and the values are the corresponding of each</p></li>
+<li><p>Request Arguments: None</p></li>
+<li><p>Returns: An object with four keys, success, total_questions, currentCategory, and questions that contains an array of objects.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;currentCategory&quot;</span><span class="p">:</span> <span class="s2">&quot;Sports&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;questions&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="s2">&quot;Uruguay&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+         <span class="s2">&quot;difficulty&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+         <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+         <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;Which country won the first ever soccer World Cup in 1930?&quot;</span>
+      <span class="p">},</span> <span class="o">...</span><span class="p">],</span>
+   <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+   <span class="s2">&quot;total_questions&quot;</span><span class="p">:</span> <span class="mi">20</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p id="post-quizzes"><strong>POST</strong>
+<em>‘/quizzes’</em></p>
+<ul class="simple">
+<li><p>Fetches a question from the available categories</p></li>
+<li><p>Request Arguments: a list of previous questions IDs and the specific category you want the questions in</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;previous_questions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">22</span><span class="p">],</span>
+   <span class="s2">&quot;quiz_category&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Science&quot;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Returns: An object with three keys, success, num_of_categories, and categories, that contains a object of id: category_string key:value pairs.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="s2">&quot;Alexander Fleming&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;difficulty&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+      <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="s2">&quot;Who discovered penicillin?&quot;</span>
+   <span class="p">},</span>
+   <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Trivia API</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Ahmed Alaa.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
