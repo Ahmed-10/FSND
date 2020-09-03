@@ -134,7 +134,7 @@ def patch_drink(payload, id):
 
     return jsonify({
         'success': True,
-        'drink': drink.long()
+        'drinks': [drink.long()]
     })
 
 
