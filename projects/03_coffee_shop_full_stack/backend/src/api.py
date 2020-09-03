@@ -53,9 +53,9 @@ returns
 '''
 
 
-@app.route('/drinks-details')
+@app.route('/drinks-detail')
 @requires_auth('get:drinks-detail')
-def get_drinks_details():
+def get_drinks_details(payload):
     drinks = Drink.query.all()
 
     return jsonify({
@@ -79,17 +79,18 @@ returns
 
 @app.route('/drinks', methods=['POST'])
 @requires_auth('post:drinks')
-def post_drink():
+def post_drink(payload):
     _request = request.get_json()
 
     try:
         recipe = json.dumps(_request['recipe'])
 
-        drink = Drink()
-        drink.title = _request['title']
-        drink.recipe = recipe
-
+        drink = Drink(
+            title=_request['title'],
+            recipe=recipe
+        )
         drink.insert()
+
     except Exception:
         abort(400)
 
@@ -116,7 +117,7 @@ returns
 
 @app.route('/drinks/<int:id>', methods=['PATCH'])
 @requires_auth('patch:drinks')
-def patch_drink(id):
+def patch_drink(payload, id):
     drink = Drink.query.get(id)
     if drink is None:
         abort(404)
@@ -153,7 +154,7 @@ returns
 
 @app.route('/drinks/<int:id>', methods=['DELETE'])
 @requires_auth('delete:drinks')
-def delete_drink(id):
+def delete_drink(payload, id):
     drink = Drink.query.get(id)
     if drink is None:
         abort(404)
